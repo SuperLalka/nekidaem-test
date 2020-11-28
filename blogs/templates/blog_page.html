@@ -1,0 +1,34 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <header class="header">
+    <h2 class="header__blog-name">{{ blog.user|default:user.username }} Blog</h2>
+  </header>
+  <main class="main">
+  <div class="main__aside-block aside-block">
+    <a type="button" href="#footer"
+       class="aside-block__button-down btn btn-warning">Перейти вниз страницы</a>
+  </div>
+    <div class="main__posts-block">
+      <div class="main__posts-list">
+        {% for post in posts_list %}
+          <div class="main__post-item card">
+            <div class="card-header">
+              {{ post.header }}
+            </div>
+            <div class="card-body">
+              <p class="card-text">{{ post.text|safe }}</p>
+            </div>
+            <div class="card-footer">
+              {{ post.created_at }}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </main>
+  <footer class="footer">
+    <a name="footer" href="{% url 'blogs:news_feed' blog.id %}"
+       class="footer__news-feed-link">Перейти к ленте новостей</a>
+  </footer>
+{% endblock %}

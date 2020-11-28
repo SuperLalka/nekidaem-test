@@ -1,0 +1,50 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <header class="header">
+    <h2 class="header__blog-name">{{ blog.user }} news feed</h2>
+  </header>
+  <main class="main">
+    <div class="main__aside-block aside-block">
+      <a type="button" href="#footer"
+         class="aside-block__button-down btn btn-warning">Перейти вниз страницы</a>
+      <div class="aside-block__subscriptions-list">
+        <ul class="list-group">
+          <h3 class="aside-block__subscriptions-title">
+            {% if list_of_subscriptions %}
+              В данный момент вы подписаны на блоги пользователей:
+            {% else %}
+              Подписок нет
+            {% endif %}
+          </h3>
+          {% for subscription in list_of_subscriptions %}
+            <li class="list-group-item">
+              <a href="{% url 'blogs:blog' subscription.id %}"
+                 class="aside-block__subscription-item">{{ subscription.user }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class="main__news-block">
+      <div class="main__news-list">
+        {% for news in news_list %}
+          <div class="main__news-item card">
+            <div class="card-header">
+              {{ news.header }}
+            </div>
+            <div class="card-body">
+              <p class="card-text">{{ news.text|safe }}</p>
+            </div>
+            <div class="card-footer">
+              {{ news.created_at }}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </main>
+  <footer class="footer">
+    <a name="footer" href="{% url 'blogs:blog' blog.id %}"
+       class="footer__news-feed-link">Перейти к блогу пользователя</a>
+  </footer>
+{% endblock %}
