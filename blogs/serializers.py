@@ -14,4 +14,4 @@ class PostsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Post
-        exclude = ['read_by_user', 'created_at']
+        exclude = ['created_at']
