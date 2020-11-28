@@ -1,7 +1,10 @@
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
 from rest_framework_simplejwt import views as jwt_views
+
+from . import settings
 
 
 tokens_url = [
@@ -15,3 +18,5 @@ urlpatterns = [
     path('token/', include(tokens_url)),
     path('', include('blogs.urls')),
 ]
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
