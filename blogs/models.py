@@ -6,7 +6,8 @@ from tinymce.models import HTMLField
 
 class ExtendingUser(models.Model):
     user = models.OneToOneField(django_settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    subscribed_to = models.ManyToManyField('Blog')
+    subscribed_to = models.ManyToManyField('Blog', blank=True)
+    read_posts = models.ManyToManyField('Post', blank=True)
 
     def __str__(self):
         return self.user.username
@@ -38,7 +39,6 @@ class Post(models.Model):
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE, null=True, blank=True)
     header = models.CharField(max_length=20, help_text="Enter a post header")
     text = HTMLField(help_text="Enter a post text")
-    read_by_user = models.ManyToManyField('ExtendingUser')
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
 
     def __str__(self):
