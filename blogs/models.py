@@ -48,4 +48,3 @@ class Post(models.Model):
         ordering = ['-created_at']
         verbose_name = 'Post'
         verbose_name_plural = 'Posts'
-
