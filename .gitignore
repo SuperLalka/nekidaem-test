@@ -15,6 +15,7 @@ downloads/
 eggs/
 .eggs/
 .idea/
+nekidaem-test/.idea/
 lib/
 lib64/
 parts/
