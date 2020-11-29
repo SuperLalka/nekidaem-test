@@ -13,7 +13,9 @@ SECRET_KEY = '2_j!st%!q#ikkh2329kqe$6+1wcbyt8rx1z4xw(9^jjo1&6adh'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
+
+ALLOWED_PORT = '8000'
 
 # Application definition
 
@@ -111,11 +113,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'app_shop/static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'collectstatic/static/')
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'app_shop/media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'collectstatic/media/')
 
 # DRF settings
 
@@ -160,3 +162,8 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=60),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
+
+
+PROJECT_EMAIL = 'nekidaem@gmail.com'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
