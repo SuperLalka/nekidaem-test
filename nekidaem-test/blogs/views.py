@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import generic
-from rest_framework import viewsets, mixins
+from rest_framework import mixins
 from rest_framework import permissions as drf_permissions
 from rest_framework.decorators import action
 from rest_framework.viewsets import GenericViewSet
@@ -10,6 +10,9 @@ from . import models, permissions, serializers
 
 
 def user_blog(request):
+    if request.user.is_anonymous:
+        return render(request, 'auth_page.html')
+
     extendinguser = models.ExtendingUser.objects.get(user=request.user)
     blog = models.Blog.objects.get(user=extendinguser)
     posts_list = models.Post.objects.filter(blog=blog)
