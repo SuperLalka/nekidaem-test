@@ -1,21 +1,23 @@
 from django.contrib import admin
 
-from . import models
+from blogs.models import (
+    Blog, Post, User,
+)
 
 
-@admin.register(models.ExtendingUser)
-class ExtendingUserAdmin(admin.ModelAdmin):
-    list_display = ('user',)
-    search_fields = ('user',)
+@admin.register(User)
+class UserAdmin(admin.ModelAdmin):
+    list_display = ('username',)
+    search_fields = ('username',)
 
 
-@admin.register(models.Blog)
+@admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
-    list_display = ('user', 'created_at')
+    list_display = ('author', 'created_at')
     date_hierarchy = 'created_at'
 
 
-@admin.register(models.Post)
+@admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     list_display = ('blog', 'header', 'created_at')
     search_fields = ('blog', 'header')
