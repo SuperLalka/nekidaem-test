@@ -4,9 +4,8 @@ from django.test import TestCase
 from hamcrest import *
 from rest_framework.test import APIClient
 
-from blogs.factories import (
-    UsersFactory,
-    ExtendingUserFactory,
+from .factories import (
+    UserFactory,
     BlogFactory,
     PostFactory
 )
@@ -18,8 +17,8 @@ class PostsApiTestCase(TestCase):
     def setUp(self):
         self.client = APIClient()
 
-        self.django_user = UsersFactory()
-        self.user = ExtendingUserFactory(user=self.django_user)
+        self.django_user = UserFactory()
+        self.user = UserFactory(user=self.django_user)
         self.user_blog = BlogFactory(user=self.user)
         self.user_blog_post = PostFactory(blog=self.user_blog)
 

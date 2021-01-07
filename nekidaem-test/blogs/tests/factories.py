@@ -1,29 +1,21 @@
 import factory
 from datetime import datetime
-from django.contrib.auth.models import User
 
-from . import models
+from blogs import models
 
 
-class UsersFactory(factory.django.DjangoModelFactory):
+class UserFactory(factory.django.DjangoModelFactory):
     class Meta:
-        model = User
+        model = models.User
 
     username = factory.Sequence(lambda n: 'user%d' % n)
-
-
-class ExtendingUserFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = models.ExtendingUser
-
-    user = factory.SubFactory(UsersFactory)
 
 
 class BlogFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = models.Blog
 
-    user = factory.SubFactory(ExtendingUserFactory)
+    author = factory.SubFactory(UserFactory)
     created_at = factory.LazyFunction(datetime.now)
 
 
