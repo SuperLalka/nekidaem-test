@@ -1,33 +1,24 @@
-from django.conf import settings as django_settings
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 from tinymce.models import HTMLField
 
 
-class ExtendingUser(models.Model):
-    user = models.OneToOneField(django_settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+class User(AbstractUser):
     subscribed_to = models.ManyToManyField('Blog', blank=True)
     read_posts = models.ManyToManyField('Post', blank=True)
 
     def __str__(self):
-        return self.user.username
-
-    class Meta:
-        ordering = ['user']
-        verbose_name = 'Extra info | User'
-        verbose_name_plural = 'Extra info | Users'
+        return self.username
 
 
 class Blog(models.Model):
-    user = models.ForeignKey(ExtendingUser, on_delete=models.CASCADE, related_name='blog',
-                             null=True, blank=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_blog',
+                               null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
 
     def __str__(self):
-        return "{0}'s blog".format(self.user)
-
-    def check_author(self):
-        pass
+        return "{0}'s blog".format(self.author)
 
     class Meta:
         ordering = ['created_at']
