@@ -2,7 +2,7 @@
 
 {% block content %}
   <header class="header">
-    <h2 class="header__blog-name">{{ blog.user }} news feed</h2>
+    <h2 class="header__blog-name">{{ blog.author }} news feed</h2>
   </header>
   <main class="main">
     <div class="main__aside-block aside-block">
@@ -20,7 +20,7 @@
           {% for subscription in list_of_subscriptions %}
             <li class="list-group-item">
               <a href="{% url 'blogs:blog' subscription.id %}"
-                 class="aside-block__subscription-item">{{ subscription.user }}</a></li>
+                 class="aside-block__subscription-item">{{ subscription.author }}</a></li>
           {% endfor %}
         </ul>
       </div>

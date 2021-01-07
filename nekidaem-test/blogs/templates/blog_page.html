@@ -2,7 +2,7 @@
 
 {% block content %}
   <header class="header">
-    <h2 class="header__blog-name">{{ blog.user|default:user.username }} Blog</h2>
+    <h2 class="header__blog-name">{{ blog.author|default:user.username }} Blog</h2>
   </header>
   <main class="main">
   <div class="main__aside-block aside-block">
